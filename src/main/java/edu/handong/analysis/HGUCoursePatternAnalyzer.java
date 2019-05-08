@@ -54,11 +54,28 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
+		Student[] tmpStudents = new Student[numOfStudents];
 		
+		int i = 0;
 		// TODO: implement this method
+		// 1. lines를 반복하는 반복문이 필요.
+		for (String line : lines)
+		{
+			// 2. 한 문자열에 대한 이름을 뽑아야 함.
+			String name = line.substring(8, 14);
+
+			// 3. 추출한 이름 -> Student newStudent = new Student(추출한 이름);
+			Student newStudent = new Student(name);
+			// 3-1. 중복체크를 해서같은 이름이 들어있으면 건너뛰도록.
+			if (studentExist(tmpStudents, newStudent))
+				continue;
+			
+			// 4. 배열에 넣어야 한다. tmpStudents[i] = newStudent;
+			tmpStudents[i] = newStudent;
+			i++;
+		}
 		
-		
-		return null;
+		return tmpStudents;
 	}
 
 	/**
@@ -68,9 +85,19 @@ public class HGUCoursePatternAnalyzer {
 	 * @return boolean
 	 */
 	private boolean studentExist(Student[] students, Student student) {
-		
-		// TODO: implement this method
 
+		// 1. students를 반복하는 for문 만든다.
+		// 2. student와 students[i] 가 같은지 비교. 비교할때는 getName() 이 메서드를 써야함.
+		// 3. 같으면 return true
+
+		for (Student current : students)
+		{
+			if (current != null && current.getName().equals(student.getName()))
+			{
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	
@@ -80,10 +107,23 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
+		Course[] tmpCourses = new Course[numOfCourses];
 		
-		// TODO: implement this method
+		int i = 0;
 		
-		return null;
+		for (String line : lines)
+		{
+			String name = line.substring(16);
+
+			Course newCourse = new Course(name);
+			if (courseExist(tmpCourses, newCourse))
+				continue;
+			
+			tmpCourses[i] = newCourse;
+			i++;
+		}
+		
+		return tmpCourses;
 	}
 
 	/**
@@ -94,8 +134,14 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private boolean courseExist(Course[] courses, Course course) {
 		
-		// TODO: implement this method
-
+		for (Course current : courses)
+		{
+			if (current != null && current.getCourseName()==course.getCourseName())
+			{
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
