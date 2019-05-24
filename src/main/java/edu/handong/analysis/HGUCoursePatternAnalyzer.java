@@ -51,7 +51,7 @@ public class HGUCoursePatternAnalyzer {
 	/**
 	 * This method returns a Student array to initiate the field, students, from lines.
 	 * @param lines
-	 * @return
+	 * @return array of student 
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
 		Student[] tmpStudents = new Student[numOfStudents];
@@ -136,7 +136,7 @@ public class HGUCoursePatternAnalyzer {
 		
 		for (Course current : courses)
 		{
-			if (current != null && current.getCourseName()==course.getCourseName())
+			if (current != null && current.getCourseName().equals(course.getCourseName()))
 			{
 				return true;
 			}
